@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
+use App\Models\Library;
 
 class BookSeeder extends Seeder
 {
@@ -74,9 +75,13 @@ class BookSeeder extends Seeder
     ['title' => 'A Man Called Ove', 'author' => 'Fredrik Backman', 'percent' => 90, 'description' => 'A grumpy widower finds unexpected friendship with new neighbors.'],
     ['title' => 'Eleanor Oliphant Is Completely Fine', 'author' => 'Gail Honeyman', 'percent' => 80, 'description' => 'A lonely woman learns to confront her past and embrace life.'],
 ];
+
+        $libraries = Library::all();
+
         
         // Insert all books
         foreach ($books as $book) {
+            $book['library_id'] = $libraries->random()->id;
             Book::create($book);
         }
     }

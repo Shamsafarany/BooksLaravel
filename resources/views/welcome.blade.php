@@ -11,7 +11,7 @@
 <body class="text-center px-8 py-12">
     <h1>WELCOME to NINJAS</h1>
     <p>Click button to view Books</p>
-    <a href="/books" class="btn mt-4 inline-block">
+    <a href="{{ route('books.index') }}" class="btn mt-4 inline-block">
         Find Books
     </a>
 </body>

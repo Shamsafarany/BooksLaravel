@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Library;
 
 class BookController extends Controller
 {
@@ -21,6 +22,21 @@ class BookController extends Controller
     }
     public function create(){
         //create view (form)
-        return view('Books.create');
+        $libraries = Library::all();
+        return view('Books.create', ['libraries' => $libraries]);
+    }
+
+    public function store(Request $request){
+       //validates form data
+       $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'percent' => 'required|integer|min:0|max:100',
+        'description' => 'required|string|min:1|max:1000',
+        'library_id' => 'required|exists:libraries,id'
+       ]);
+       Book::create($validated);
+       return redirect()->route('books.index');
+
     }
 }

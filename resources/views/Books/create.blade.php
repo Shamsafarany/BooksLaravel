@@ -4,22 +4,22 @@
         @csrf
         <h2>Add a New Book</h2>
         <label for="title">Book Title: </label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" value="{{ old('title') }}" required>
 
         <label for="author">Author Name: </label>
-        <input type="text" id="author" name="author" required>
+        <input type="text" id="author" name="author" value="{{ old('author') }}" required>
 
         <label for="percent">Complete Percentage [0-100]: </label>
-        <input type="number" id="percent" name="percent" required>
+        <input type="number" id="percent" name="percent" value="{{old('percent') }}" required>
 
         <label for="description">Book Description: </label>
-        <textarea name="description" id="description" rows="5" required></textarea>
+        <textarea name="description" id="description" rows="5" required>{{ old('description') }}</textarea>
 
         <label for="library_id">Library: </label>
         <select name="library_id" id="library_id">
             <option value="" disabled selected>Select a library</option>
             @foreach ($libraries as $library )
-                <option value="{{ $library->id }}">{{ $library->name }}</option>    
+                <option value="{{ $library->id }}" {{ $library->id== old('library_id')? 'selected' : '' }}>{{ $library->name }}</option>    
             @endforeach
         </select>
 

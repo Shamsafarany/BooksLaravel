@@ -15,6 +15,12 @@
         <p><strong>About Library: </strong> {{ $book->library->description }}
         </p>
     </div>
+
+    <form action="{{ route('books.destroy', ['title' => $book->title, 'id' => $book->id]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn my-4">Delete Book</button>
+    </form>
 </x-layout>
     
 

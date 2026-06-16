@@ -37,6 +37,13 @@ class BookController extends Controller
        ]);
        Book::create($validated);
        return redirect()->route('books.index');
-
     }
+
+    public function destroy($title, $id){
+       $book = Book::findOrFail($id);
+       $book->delete();
+       return redirect()->route('books.index');
+    }
+    //public function edit();
+    //public function update();
 }

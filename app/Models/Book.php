@@ -10,4 +10,8 @@ class Book extends Model
     protected $fillable = ['title','author','percent', 'description'];
     /** @use HasFactory<\Database\Factories\BookFactory> */
     use HasFactory;
+
+    public function library(){
+        return $this->belongsTo(Library::class);
+    }
 }

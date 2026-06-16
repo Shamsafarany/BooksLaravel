@@ -5,5 +5,17 @@
         <p><strong>Percent: </strong> {{ $book->percent. "%" }}</p>
         <p>Description: {{ $book->description}}</p>
     </div>
+
+    <div class="border-2 border-dashed bg-white px-4 pb-4 my-4 rounded">
+        <h3>Library Info</h3>
+        <p><strong>Library Name: </strong> {{ $book->library->name }}
+        </p>
+        <p><strong>Location: </strong> {{ $book->library->location }}
+        </p>
+        <p><strong>About Library: </strong> {{ $book->library->description }}
+        </p>
+    </div>
 </x-layout>
     
+
+

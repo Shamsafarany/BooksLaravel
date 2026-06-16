@@ -9,4 +9,8 @@ class Library extends Model
 {
     /** @use HasFactory<\Database\Factories\LibraryFactory> */
     use HasFactory;
+
+    public function books(){
+        return $this->hasMany(Book::class);
+    }
 }

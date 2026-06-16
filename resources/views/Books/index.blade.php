@@ -5,7 +5,12 @@
         @foreach ($books as $book)
             <li>
                 <x-card :href="route('books.show', ['title' => $book->title, 'id' => $book->id])" :highlight="$book->percent == 100" >
-                    <h3>{{ $book["title"] }}</h3>
+                    <div>
+                        <h3>{{ $book->title }}</h3>
+                        <p>{{ $book->library->name }}</p>
+                        <p>{{ $book->library->location }}</p>
+                    </div>
+                    
                 </x-card>
             </li>
         @endforeach

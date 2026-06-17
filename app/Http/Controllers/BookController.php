@@ -12,13 +12,13 @@ class BookController extends Controller
         //fetch records, pass to view
         //$books = Book::all();
         $books = Book::with('library')->orderBy("created_at","desc")->paginate(10);
-        return view('Books.index', ["books" => $books]);
+        return view('books.index', ["books" => $books]);
     }
 
     public function show($title, $id){
         //fetch one record and pass to show view
         $book = Book::with('library')->findOrFail($id);
-        return view('Books.show', ['book'=> $book]);
+        return view('books.show', ['book'=> $book]);
     }
     public function create(){
         //create view (form)
@@ -36,20 +36,33 @@ class BookController extends Controller
         'library_id' => 'required|exists:libraries,id'
        ]);
        Book::create($validated);
-       return redirect()->route('Books.index')->with('success', 'Book Added!');
+       return redirect()->route('books.index')->with('success', 'Book Added!');
     }
 
     public function edit($id){
         $book = Book::findOrFail($id);
         $libraries = Library::all();
-        return view('Books.edit', ['book' => $book, 'libraries'=> $libraries]);
+        return view('books.edit', ['book' => $book, 'libraries'=> $libraries]);
+    }
+
+    public function update(Request $request , $id){
+        $book = Book::findOrFail($id);
+        $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'percent' => 'required|integer|min:0|max:100',
+        'description' => 'required|string|min:1|max:1000',
+        'library_id' => 'required|exists:libraries,id'
+       ]);
+       $book->update($validated);
+       return redirect()->route('books.index')->with('success', 'Book Details Edited!');
     }
 
     public function destroy($title, $id){
        $book = Book::findOrFail($id);
        $book->delete();
-       return redirect()->route('Books.index')->with('success', "Book Deleted!");
+       return redirect()->route('books.index')->with('success', "Book Deleted!");
     }
-    //public function edit();
+
     //public function update();
 }

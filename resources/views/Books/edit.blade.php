@@ -1,7 +1,8 @@
 <x-layout>
     
-    <form action="" method="POST">
+    <form action="{{ route('books.update', $book->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <h2>Edit {{ $book->title }}</h2>
         <label for="title">Book Title: </label>
         <input type="text" id="title" name="title" value="{{ $book->title }}" required>

@@ -36,13 +36,13 @@ class BookController extends Controller
         'library_id' => 'required|exists:libraries,id'
        ]);
        Book::create($validated);
-       return redirect()->route('books.index');
+       return redirect()->route('books.index')->with('success', 'Book Added!');
     }
 
     public function destroy($title, $id){
        $book = Book::findOrFail($id);
        $book->delete();
-       return redirect()->route('books.index');
+       return redirect()->route('books.index')->with('success', "Book Deleted!");
     }
     //public function edit();
     //public function update();

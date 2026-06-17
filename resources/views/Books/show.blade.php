@@ -21,6 +21,10 @@
         @method('DELETE')
         <button type="submit" class="btn my-4">Delete Book</button>
     </form>
+    <form action="{{ route('books.edit', ['id' => $book->id]) }}" method="GET">
+        @csrf
+        <button type="submit" class="btn my-4">Edit Book</button>
+    </form>
 </x-layout>
     
 

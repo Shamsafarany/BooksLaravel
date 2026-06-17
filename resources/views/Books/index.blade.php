@@ -10,7 +10,7 @@
                         <p>{{ $book->library->name }}</p>
                         <p>{{ $book->library->location }}</p>
                     </div>
-                    
+                      
                 </x-card>
             </li>
         @endforeach

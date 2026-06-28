@@ -17,8 +17,20 @@
     <header>
         <nav>
             <h1>Book Network</h1>
-            <a href="{{ route('books.index') }}">All Books</a>
-            <a href="{{ route('books.create') }}">Add New Book</a>
+            @auth
+                <span class="border-r-2 pr-2">
+                    Hi there, {{ Auth::user()->name  }}
+                </span>
+                <a href="{{ route('books.index') }}">All Books</a>
+                <a href="{{ route('books.create') }}">Add New Book</a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            @else
+                <a href="{{ route('show.login') }}" class="btn">Login</a>
+                <a href="{{ route('show.register') }}" class="btn">Register</a>
+            @endauth
         </nav>
     </header>
     <main class="container">
